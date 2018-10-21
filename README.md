@@ -1,5 +1,5 @@
 # bismon-docker
-Dockerfile for [bismon](https://github.com/bstarynk/bismon).
+Dockerfile for [bismon](https://github.com/bstarynk/bismon). Not working yet. 
 
 ## How to run
 ` docker run -it bismon:latest`
