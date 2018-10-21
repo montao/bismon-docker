@@ -16,7 +16,7 @@
 FROM ubuntu:latest
 MAINTAINER Niklas Rosencrantz (niklasro@gmail.com)
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update
+RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
 RUN apt-get install --yes software-properties-common
 RUN apt-add-repository --yes --update ppa:ubuntu-toolchain-r/test
 RUN apt-get update
