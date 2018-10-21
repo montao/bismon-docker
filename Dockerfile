@@ -29,6 +29,8 @@ RUN git clone https://github.com/ianlancetaylor/libbacktrace.git
 RUN cd libbacktrace; ./configure ; make; make install
 RUN cd; git clone https://github.com/davidmoreno/onion.git; cd onion; mkdir build; cd build; cmake ..; make; make install
 RUN cd; cp /usr/local/lib/libonion* /usr/lib; cp /usr/local/lib/libbacktrace* /usr/lib; git clone https://github.com/bstarynk/bismon.git; cd bismon; make
+RUN useradd --system -s /sbin/nologin someuser
+USER someuser
 
 
 
