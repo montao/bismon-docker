@@ -20,9 +20,11 @@ RUN apt-get update
 RUN apt-get install --yes software-properties-common
 RUN apt-add-repository --yes --update ppa:ubuntu-toolchain-r/test
 RUN apt-get update
+RUN apt-get install --yes git
 RUN apt-get install --yes gcc-snapshot
-RUN apt-get install --yes build-essential make ninja-build gcc-8 g++-8 gcc-8-plugin-dev libgccjit-8-dev libgtk-3-dev cmake
-RUN apt-get install --yes markdown indent astyle tardy texlive texlive-full hevea git
+RUN apt-get install --yes build-essential make gcc-8 cmake
+RUN apt-get install --yes ninja-build g++-8 gcc-8-plugin-dev libgccjit-8-dev libgtk-3-dev
+RUN apt-get install --yes markdown indent astyle tardy texlive texlive-full hevea 
 RUN git clone https://github.com/ianlancetaylor/libbacktrace.git
 RUN cd libbacktrace; ./configure ; make; make install
 RUN cd; git clone https://github.com/davidmoreno/onion.git; cd onion; mkdir build; cd build; cmake ..; make; make install
