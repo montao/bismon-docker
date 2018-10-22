@@ -1,8 +1,9 @@
 # bismon-docker
-Dockerfile for [bismon](https://github.com/bstarynk/bismon). The aim is to create a working environment for bismon. 
+Dockerfile for [bismon](https://github.com/bstarynk/bismon). 
 
 ## How to build
-Clone the project, cd into the directory with the Dockerfile and execute ` docker build -t bismon:latest .` This will create the image and download and build many dependecies. 
+` docker build -t bismon:latest .`
 
 ## How to run
-` docker run -it -p 8080:8080 bismon:latest`.
+` docker run -it -p 8080:8080 bismon:latest`
+
