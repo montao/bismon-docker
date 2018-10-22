@@ -14,18 +14,15 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-FROM ubuntu:latest
+FROM ubuntu:18.04
 MAINTAINER Niklas Rosencrantz (niklasro@gmail.com)
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
 RUN apt-get install --yes software-properties-common
 RUN apt-add-repository --yes --update ppa:ubuntu-toolchain-r/test
 RUN apt-get update
-RUN apt-get install --yes git
-RUN apt-get install --yes gcc-snapshot
-RUN apt-get install --yes build-essential make gcc-8 cmake
-RUN apt-get install --yes ninja-build g++-8 gcc-8-plugin-dev libgccjit-8-dev libgtk-3-dev
-RUN apt-get install --yes markdown indent astyle tardy texlive texlive-full hevea
+RUN apt-get update && apt-get install --yes git gcc-snapshot && apt-get autoremove && apt-get autoclean
+RUN apt-get install --yes build-essential make gcc-8 cmake ninja-build g++-8 gcc-8-plugin-dev libgccjit-8-dev libgtk-3-dev markdown indent astyle tardy texlive texlive-full hevea
 RUN adduser --disabled-password --gecos '' newuser
 USER newuser
 WORKDIR /home/newuser
