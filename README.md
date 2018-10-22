@@ -5,4 +5,4 @@ Dockerfile for [bismon](https://github.com/bstarynk/bismon). The aim is to creat
 Clone the project, cd into the directory with the Dockerfile and execute ` docker build -t bismon:latest .` This will create the image and download and build many dependecies. 
 
 ## How to run
-` docker run -it -p 80:80 bismon:latest`.
+` docker run -it -p 8080:8080 bismon:latest`.
