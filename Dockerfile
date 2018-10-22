@@ -13,10 +13,11 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
 FROM ubuntu:latest
 MAINTAINER Niklas Rosencrantz (niklasro@gmail.com)
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
+RUN apt-get update
 RUN apt-get install --yes software-properties-common
 RUN apt-add-repository --yes --update ppa:ubuntu-toolchain-r/test
 RUN apt-get update
@@ -24,13 +25,23 @@ RUN apt-get install --yes git
 RUN apt-get install --yes gcc-snapshot
 RUN apt-get install --yes build-essential make gcc-8 cmake
 RUN apt-get install --yes ninja-build g++-8 gcc-8-plugin-dev libgccjit-8-dev libgtk-3-dev
-RUN apt-get install --yes markdown indent astyle tardy texlive texlive-full hevea 
+RUN apt-get install --yes markdown indent astyle tardy texlive texlive-full hevea
+RUN adduser --disabled-password --gecos '' newuser
+USER newuser
+WORKDIR /home/newuser
 RUN git clone https://github.com/ianlancetaylor/libbacktrace.git
-RUN cd libbacktrace; ./configure ; make; make install
-RUN cd; git clone https://github.com/davidmoreno/onion.git; cd onion; mkdir build; cd build; cmake ..; make; make install
-RUN cd; cp /usr/local/lib/libonion* /usr/lib; cp /usr/local/lib/libbacktrace* /usr/lib; git clone https://github.com/bstarynk/bismon.git; cd bismon; make
-RUN useradd --system -s /sbin/nologin someuser
-USER someuser
+RUN cd libbacktrace; ./configure ; make
+USER root
+WORKDIR /home/newuser/libbacktrace
+RUN make install
+USER newuser
+RUN cd; git clone https://github.com/davidmoreno/onion.git; cd onion; mkdir build; cd build; cmake ..; make
+USER root
+WORKDIR /home/newuser/onion/build
+RUN make install; cp /usr/local/lib/libonion* /usr/lib; cp /usr/local/lib/libbacktrace* /usr/lib
+USER newuser
+RUN cd; git clone https://github.com/bstarynk/bismon.git; cd bismon; make; touch ~/passwords_BM; chmod u+rw,go-rwx ~/passwords_BM
+WORKDIR /home/newuser/bismon
 
 
 
